@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xingxing.mybatisdemo.dao.UserDao">
+
+    <insert id="insertUser" useGeneratedKeys="true">
+        INSERT into mybatis
+        VALUES (#{id}, #{usn}, #{age})
+    </insert>
+
+    <insert id="insertUserByMap" useGeneratedKeys="true" keyProperty="id">
+        INSERT into mybatis
+        VALUES (#{id}, #{usn}, #{age})
+    </insert>
+
+    <delete id="deleteMore">
+        DELETE FROM mybatis WHERE id IN(${ids})
+    </delete>
+<!--    -->
+    <select id="selectMore" resultType="com.xingxing.mybatisdemo.pojo.Person">
+        select * from mybatis where usn like "%"#{param1}"%"
+    </select>
+
+    <sql id="test">
+        id,age
+    </sql>
+
+    <insert id="insertMore">
+        insert into mybatis
+        <foreach collection="person" item="p" separator="," open="values" close=";">
+            (null,#{p.usn},#{p.age})
+        </foreach>
+    </insert>
+
+
+</mapper>
